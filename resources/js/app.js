@@ -133,10 +133,14 @@ Vue.component ('PageMediaWatch',   PageMediaWatch);
 Vue.component ('PageTraining',     PageTraining);
 
     import BibleReader from './pages/specials/BibleReader.vue';
-    import FormContact from './pages/forms/Contact.vue';    
+    import FormContact from './pages/forms/Contact.vue';  
+    import FormNotes from './pages/forms/Notes.vue';
+
 import Vue from 'vue';
+    
     Vue.component('BibleReader', BibleReader);
     Vue.component('FormContact', FormContact);
+    Vue.component('FormNotes',   FormNotes);
 //Users Components
 
 let routes = [

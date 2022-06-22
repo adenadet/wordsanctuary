@@ -46,7 +46,7 @@
                 <div class="col-lg-7 col-xl-7">
                     <h3>Livestream</h3>
                     <div style="overflow:hidden;">
-                        <youtube video-id="moCRR-IYY0g" ref="youtube" ></youtube>
+                        <youtube :video-id="videos[0].id.videoId" ref="youtube"></youtube>
                     </div>
                     <a class="btn-outline-reg" href="#">Join</a>
                 </div>
@@ -54,18 +54,48 @@
                     <div class="row">
                         <h3>Saved Ministrations</h3>
                         <div class="col-lg-6">
-                            <div class="image-container"><img class="img-fluid" src="/nubis/images/details-2.png" alt="alternative"></div>
+                            <div class="image-container">
+                                <router-link :to="'/pages/media/watch/'+videos[1].id.videoId">
+                                <img class="img-fluid" :src="videos[1].snippet.thumbnails.high.url" :title="videos[1].snippet.title" :alt="videos[1].snippet.title" />
+                                </router-link>
+                            </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="image-container"><img class="img-fluid" src="/nubis/images/details-2.png" alt="alternative"></div>
+                            <div class="image-container">
+                                <router-link :to="'/pages/media/watch/'+videos[2].id.videoId">
+                                <img class="img-fluid" :src="videos[2].snippet.thumbnails.high.url" :title="videos[2].snippet.title" :alt="videos[2].snippet.title" />
+                                </router-link>
+                            </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="image-container"><img class="img-fluid" src="/nubis/images/details-2.png" alt="alternative"></div>
+                            <div class="image-container">
+                                <router-link :to="'/pages/media/watch/'+videos[3].id.videoId">
+                                <img class="img-fluid" :src="videos[3].snippet.thumbnails.high.url" :title="videos[3].snippet.title" :alt="videos[3].snippet.title" />
+                                </router-link>
+                            </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="image-container"><img class="img-fluid" src="/nubis/images/details-2.png" alt="alternative"></div>
+                            <div class="image-container">
+                                <router-link :to="'/pages/media/watch/'+videos[4].id.videoId">
+                                <img class="img-fluid" :src="videos[4].snippet.thumbnails.high.url" :title="videos[4].snippet.title" :alt="videos[4].snippet.title" />
+                                </router-link>
+                            </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="basic-2">
+        <div class="container">
+            <div class="row">
+                <h1>EVENTS</h1>
+                <div class="col-12">
+                    <h3>Livestream</h3>
+                    <div style="overflow:hidden;">
+                        <youtube :video-id="videos[0].id.videoId" ref="youtube"></youtube>
+                    </div>
+                    <a class="btn-outline-reg" href="#">Join</a>
                 </div>
             </div>
         </div>
@@ -76,32 +106,25 @@
 export default {
     data(){
         return {
-            categories:[],
-            certificate_types:[],
-            course:{},
-            departments: [],
-            editMode: false,
-            exam_types: [],
-            form: new Form({}),
-            lessons: {},
-            sub_categories:[],
-            tutors: [],
-            users:[],   
+            videos: {},
+            channelID: 'UC3PXrUTffkEAyFLvfzlrliw',
+            maxResult: 5,
+            api_key: 'AIzaSyDgLOsMSzF83g5wF9sgtCoJxpnUImvt3Bk',  
         }
     },
     methods:{
         getAllInitials(){
             this.$Progress.start();
-            /* axios.get('/api/lms/courses/'+this.$route.params.id)
+            axios.get('https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId='+this.channelID+'&maxResults='+this.maxResult+'&key='+this.api_key)
             .then(response =>{
-                this.courseReload(response);
+                this.videos = response.data.items;
+                toast.fire({icon: 'success', title: 'Home was loaded successfully',});
                 this.$Progress.finish();
-                toast.fire({icon: 'success', title: 'Course was loaded successfully',});
             })
             .catch(()=>{
                 this.$Progress.fail();
-                toast.fire({icon: 'error', title: 'Course was not loaded successfully',})
-            }); */
+                toast.fire({icon: 'error', title: 'Home was not loaded successfully',})
+            });
         },
     },
     mounted() {
