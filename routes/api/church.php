@@ -8,6 +8,6 @@ Route::group(['prefix'=>'church'], function () {
     Route::get('/givings',  'ChurchController@givings')->name('givings');
 
     Route::apiResources([
-        '/events' => 'EventController',
+        '/events' => 'Church\EventController',
     ]);
 });

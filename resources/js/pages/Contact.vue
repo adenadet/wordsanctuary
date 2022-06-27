@@ -25,8 +25,34 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 text-center mt-5">
-                    <h1>Our Branches</h1>
-                    <p>Find a Branch close to you</p>
+                    <h1>Our Installations</h1>
+                    <p>Find an installlation close to you</p>
+                </div>
+                 <div class="col-md-12 mt-3">
+                    <div class="card" style="backgroud: #EEF;">
+                        <div class="card-header text-muted border-bottom-0"><h3 class="card-title">Head Quarters, Ilorin, Kwara State.</h3></div>
+                        <div class="card-body pb-0 bg-light">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="lead"><b>Word Sanctuary HQ</b></h2>
+                                    <p class="text-muted text-sm"><b>Address: </b> Royal Shekinah Hotel and Grand Suites, Ajase-Ipo road, Offa Garage, Ilorin, Kwara</p>
+                                </div>
+                                <div class="col-5 text-center">
+                                </div>
+                                <div class="col-12">
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> Phone #: </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right">
+                                <button class="btn btn-sm bg-success"><i class="fas fa-comments"></i></button>
+                                <button class="btn btn-sm bg-primary" title="See Location"><i class="fas fa-map-marker"></i></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4 mt-3" v-for="branch in branches" :key="branch.id">
                     <div class="card" style="backgroud: #EEF;">

@@ -81,6 +81,11 @@ window.Fire = new Vue();
 //Import Flutterwave for all components
 import Flutterwave from 'vue-flutterwave'
 Vue.use(Flutterwave, { publicKey: 'FLWPUBK-81fc7da0bf14b563d2dc2c36d4817132-X' })
+
+//Import Horizontal List
+import VueHorizontalList from 'vue-horizontal-list';
+Vue.use(VueHorizontalList);
+
 //Import Multiselect Option
 import Multiselect from 'vue-multiselect'
 Vue.component('multiselect', Multiselect)
@@ -118,6 +123,7 @@ Vue.filter('shortDate', function(text){
     return moment(text).format('MMM Do, YY');
     });
 
+import PageAbout        from    './pages/About.vue'; 
 import PageContact      from    './pages/Contact.vue';
 import PageGivings      from    './pages/Givings.vue';
 import PageHome         from    './pages/Home.vue';
@@ -125,6 +131,7 @@ import PageMedia        from    './pages/Media.vue';
 import PageMediaWatch   from    './pages/Watch.vue';
 import PageTraining     from    './pages/Training.vue';
 
+Vue.component ('PageAbout',        PageAbout);
 Vue.component ('PageContact',      PageContact);
 Vue.component ('PageGivings',      PageGivings);
 Vue.component ('PageHome',         PageHome);
@@ -145,6 +152,7 @@ import Vue from 'vue';
 
 let routes = [
     {path: '/',                             component: PageHome},
+    {path: '/pages/about',                  component: PageAbout},
     {path: '/pages/contact',                component: PageContact},
     {path: '/pages/givings',                component: PageGivings},
     {path: '/pages/home',                   component: PageHome},

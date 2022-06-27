@@ -41,14 +41,14 @@
     </div>
     <div class="basic-2">
         <div class="container">
-            <div class="row">
+            <div class="row" v-if="(videos != null) && (videos[0]  != null)  ">
                 <h1>MINISTRATIONS</h1>
                 <div class="col-lg-7 col-xl-7">
                     <h3>Livestream</h3>
                     <div style="overflow:hidden;">
                         <youtube :video-id="videos[0].id.videoId" ref="youtube"></youtube>
                     </div>
-                    <a class="btn-outline-reg" href="#">Join</a>
+                    <a class="btn-outline-reg" :href="'/pages/media/watch/'+videos[0].id.videoId" target="_blank">Join</a>
                 </div>
                 <div class="col-lg-5 col-xl-5">
                     <div class="row">
@@ -67,14 +67,14 @@
                                 </router-link>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-5">
                             <div class="image-container">
                                 <router-link :to="'/pages/media/watch/'+videos[3].id.videoId">
                                 <img class="img-fluid" :src="videos[3].snippet.thumbnails.high.url" :title="videos[3].snippet.title" :alt="videos[3].snippet.title" />
                                 </router-link>
                             </div>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 mt-5">
                             <div class="image-container">
                                 <router-link :to="'/pages/media/watch/'+videos[4].id.videoId">
                                 <img class="img-fluid" :src="videos[4].snippet.thumbnails.high.url" :title="videos[4].snippet.title" :alt="videos[4].snippet.title" />
@@ -90,12 +90,34 @@
         <div class="container">
             <div class="row">
                 <h1>EVENTS</h1>
+                {{events.data}}
                 <div class="col-12">
-                    <h3>Livestream</h3>
-                    <div style="overflow:hidden;">
-                        <youtube :video-id="videos[0].id.videoId" ref="youtube"></youtube>
-                    </div>
-                    <a class="btn-outline-reg" href="#">Join</a>
+                    <h3>Upcoming Events</h3>
+                    <vue-horizontal-list :items="items" :options="options">
+                        <template v-slot:nav-prev>
+                        <div>👈</div>
+                        </template>
+
+                        <template v-slot:nav-next>
+                        <div>👉</div>
+                        </template>
+
+                        <template v-slot:default="{item}">
+<div class="card card-widget">
+    <div class="card-header">
+        <div class="user-block">
+            <img class="img-circle" :src="item.author != null ? '/dist/img/user1-128x128.jpg' : ''" alt="User Image">
+            <span class="username"><a href="#">{{item.author != null ? item.author.first_name+' '+item.author.last_name : 'UNknown User'}}</a></span>
+            <span class="description">Shared publicly - 7:30 PM Today</span>
+        </div>
+    </div>
+    <div class="card-body">
+        <img v-if ="item.image != null" class="img-fluid pad" :src="'/img/events/'+item.image" :alt="item.title">
+        <p>{{item.content}}</p>
+    </div>
+</div>
+                        </template>
+                    </vue-horizontal-list>
                 </div>
             </div>
         </div>
@@ -106,6 +128,19 @@
 export default {
     data(){
         return {
+            events: {},
+            options: {
+                responsive: [
+                    { end: 576, size: 1 },
+                    { start: 576, end: 768, size: 2 },
+                    { start: 768, end: 992, size: 3 },
+                    { size: 4 },
+                ],
+                list: {windowed: 1200, padding: 24,},
+                position: {start: 2,},
+                autoplay: { play: true, repeat: true, speed: 2500 },
+            },
+            items: [],
             videos: {},
             channelID: 'UC3PXrUTffkEAyFLvfzlrliw',
             maxResult: 5,
@@ -113,6 +148,14 @@ export default {
         }
     },
     methods:{
+        getAllEvents(){
+            axios.get('/api/church/events')
+            .then(response =>{
+                this.events = response.data.events;
+                this.items = this.events.data;
+            })
+            .catch(()=>{});
+        },
         getAllInitials(){
             this.$Progress.start();
             axios.get('https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId='+this.channelID+'&maxResults='+this.maxResult+'&key='+this.api_key)
@@ -128,6 +171,7 @@ export default {
         },
     },
     mounted() {
+        this.getAllEvents();
         this.getAllInitials();
     }
 }

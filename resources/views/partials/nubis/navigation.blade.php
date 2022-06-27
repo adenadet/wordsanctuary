@@ -15,7 +15,7 @@
                         <router-link class="nav-link" to="/pages/about">About Us</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/pages/media">Livestreams</router-link>
+                        <router-link class="nav-link" to="/pages/media">Online Church</router-link>
                     </li>
                     <li class="nav-item">
                         <router-link class="nav-link" to="/pages/events">Events</router-link>
@@ -23,18 +23,6 @@
                     <li class="nav-item">
                         <router-link class="nav-link" to="/pages/contact">Contact</router-link>
                     </li>
-                    <!--
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">Drop</a>
-                        <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="article.html">Article Details</a></li>
-                            <li><div class="dropdown-divider"></div></li>
-                            <li><a class="dropdown-item" href="terms.html">Terms Conditions</a></li>
-                            <li><div class="dropdown-divider"></div></li>
-                            <li><a class="dropdown-item" href="privacy.html">Privacy Policy</a></li>
-                        </ul>
-                    </li>
-                    -->
                 </ul>
                 <span class="nav-item">
                     <router-link to="/pages/givings" class="btn-solid-sm">Givings</router-link>
